@@ -5,17 +5,23 @@ import { useState, useEffect } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading/Loading";
+
 
 const Accounts = () => {
 
     const navigate = useNavigate();
 
+    const role = localStorage.getItem('role');
+
     const [accounts, setAccounts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    const [searchEmail, setSearchEmail] = useState('');
+    const [searchRole, setSearchRole] = useState(0);
 
-    const getAccounts= async () => {
+    const getAccounts = async () => {
         try {
             setLoading(true);
             const response = await axios.get('http://localhost:8000/api/accounts');
@@ -45,7 +51,7 @@ const Accounts = () => {
 
     // Pagination
     const [activePage, setActivePage] = useState(1);
-    const itemsCountPerPage = 10;
+    const itemsCountPerPage = 15;
     const totalItemsCount = accounts.length;
     const indexOfLastItem = activePage * itemsCountPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsCountPerPage;
@@ -55,9 +61,11 @@ const Accounts = () => {
         getAccounts();
     }, [])
 
+
     return (
         <div className="container mx-auto mt-3 p-3">
             <div className='flex justify-between items-center align-center'>
+
                 <h1 className="text-lg mx-3 mb-5 font-bold">
                     Accounts
                 </h1>
@@ -65,12 +73,30 @@ const Accounts = () => {
                 <NavLink to="/add-account" className="bg-custom-blue text-white px-4 py-2 rounded mr-3">
                     Add Account
                 </NavLink>
-
             </div>
 
-            {/* {isLoading && <h1>Loading...</h1>}
+            {/* { Add a filter function with Email and Role} */}
+            <div className='flex flex-row justify-end my-2'>
+                <input
+                    value={searchEmail}
+                    onChange={(e) => setSearchEmail(e.target.value)}
+                    type="text"
+                    placeholder="Search by Email"
+                    className="border-2 border-gray-300 p-2 w-full rounded-lg"
+                />
+                <select
+                    className="border-2 border-gray-300 p-2 rounded-lg ms-2"
+                    onChange={(e) => setSearchRole(e.target.value)}
+                >
+                    <option value="0">All</option>
+                    <option value="1">Admin</option>
+                    <option value="2">M&E Manager</option>
+                    <option value="3">Project Manager</option>
+                </select>
+            </div>
 
-      {!isLoading && error && <h1> Cannot Get Data </h1>} */}
+            {loading && <Loading />}
+
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-900">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-200">
@@ -87,47 +113,55 @@ const Accounts = () => {
                             <th scope="col" className="col-span-1 p-3">
                                 Role
                             </th>
-                            <th scope="col" className="col-span-1 p-3">
+                            { role != 3 && <th scope="col" className="col-span-1 p-3">  
                                 Action
                             </th>
+                            }
                         </tr>
                     </thead>
 
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {currentAccounts.map((account, index) => (
-                            <tr
-                                className={index % 2 === 0 ? "bg-white" : "bg-slate-100"}
-                                key={account.id}
-                            >
-                                <td className="p-3">{index + 1}</td>
-                                <td className="p-3">{account.name}</td>
-                                <td className="p-3">
-                                    {account.email}
-                                </td>
-                                <td className="p-3">{
-                                    account.role == 1 ? "Admin" :
-                                        account.role == 2 ? "M&E Manager" :
-                                            "Project Manager"
-                                }  </td>
-                                <td className="flex flex-row p-3">
-                                    <MdEdit
-                                        className="hover:text-yellow-500 hover:cursor-pointer"
-                                        title="Edit"
-                                        onClick={() => {
-                                            handleEdit(account);
-                                        }}
-                                    />
+                        {/* I want to filered with email and role */}
 
-                                    <MdDelete
-                                        className="hover:text-yellow-500 hover:cursor-pointer"
-                                        title="Edit"
-                                        onClick={() => {
-                                            handleDelete(account);
-                                        }}
-                                    />
-                                </td>
-                            </tr>
-                        ))}
+                        {currentAccounts.filter((account) =>
+                            account.email.includes(searchEmail)  && (searchRole == 0 || account.role == searchRole)).map(
+                                (account, index) => (
+                                    <tr
+                                        className={index % 2 === 0 ? "bg-white" : "bg-slate-100"}
+                                        key={account.id}
+                                    >
+                                        <td className="p-3">{index + 1}</td>
+                                        <td className="p-3">{account.name}</td>
+                                        <td className="p-3">
+                                            {account.email}
+                                        </td>
+                                        <td className="p-3">{
+                                            account.role == 1 ? "Admin" :
+                                                account.role == 2 ? "M&E Manager" :
+                                                    "Project Manager"
+                                        }  </td>
+                                    {
+                                        role != 3  && (<td className="flex flex-row p-3">
+                                        <MdEdit
+                                            className="hover:text-yellow-500 hover:cursor-pointer"
+                                            title="Edit"
+                                            onClick={() => {
+                                                handleEdit(account);
+                                            }}
+                                        />
+
+                                        <MdDelete
+                                            className="hover:text-yellow-500 hover:cursor-pointer"
+                                            title="Edit"
+                                            onClick={() => {
+                                                handleDelete(account);
+                                            }}
+                                        />
+                                    </td>)
+                                    }
+                                    </tr>
+                                ))
+                        }
                     </tbody>
                 </table>
             </div>

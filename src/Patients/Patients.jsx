@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 // ➔LTR,OSSTT,OLTR,Bpal,BpalM,Individualized-PreXDR,Individualized-
 // MDR,XDR,Other))
 
-// township {/* (CAT,CMT,PTG,PGT,AMT,MHA,AMP) */}
+
 const Township = {
     1: "CAT",
     2: "CMT",
@@ -34,7 +34,7 @@ const Township = {
     7: "AMP"
 }
 
-const Patients = (vot_table) => {
+const Patients = ({vot_table}) => {
 
     const navigate = useNavigate();
 
@@ -143,8 +143,8 @@ const Patients = (vot_table) => {
                             <th scope="col" className="p-3">
                                 Treatment Regimen
                             </th>
-                            {!vot_table && <th scope="col" className="p-3">
-                                Move to VOT
+                            {!vot_table && <th scope="col">
+                                <span>Move to VOT</span>
                             </th>}
                             {
                                 vot_table &&

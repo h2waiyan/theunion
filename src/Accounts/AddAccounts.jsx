@@ -2,17 +2,16 @@ import { Formik, Field, Form, FieldArray, ErrorMessage } from "formik";
 import { string, array, boolean, object, number } from "yup";
 import { useEffect, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import Loading from "../Loading/Loading";
 import toast from "react-hot-toast";
 import axios from 'axios';
+import Loading from "../Loading/Loading";
 
 
 let accountSchema = object({
-    name: string().required("Name cannot be blank."),
-    email: string().required("Invalid Email Address."),
+    name: string().required("Name cannot be blank.").max(16, "Only 16 characters allowed."),
+    email: string().required("Invalid Email Address.").email("Invalid Email Address."),
     password: string().required("Password cannot be blank."),
     role: number().min(1, "Please select a role.")
-
 });
 
 export const AddAccounts = () => {
@@ -23,10 +22,32 @@ export const AddAccounts = () => {
     const { state } = useLocation();
     const { accountId } = useParams();
 
+    const generatePassword = () => {
+        const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const numbers = '0123456789';
+        const symbols = '#!';
+
+        let password = '';
+        for (let i = 0; i < 3; i++) {
+            password += uppercase[Math.floor(Math.random() * uppercase.length)];
+        }
+        for (let i = 0; i < 3; i++) {
+            password += numbers[Math.floor(Math.random() * numbers.length)];
+        }
+        for (let i = 0; i < 2; i++) {
+            password += symbols[Math.floor(Math.random() * symbols.length)];
+        }
+
+        // Shuffle password
+        password = password.split('').sort(() => 0.5 - Math.random()).join('');
+
+        return password;
+    }
+
     const [account, setAccount] = useState({
         name: "",
         email: "",
-        password: "",
+        password: generatePassword(),
         role: 0
     });
 
@@ -48,7 +69,7 @@ export const AddAccounts = () => {
             setAccount({
                 name: "",
                 email: "",
-                password: "",
+                password: generatePassword(),
                 role: 0
             });
         }
@@ -75,12 +96,14 @@ export const AddAccounts = () => {
 
     async function addAccount(values, isEditing) {
         try {
-            setAddAccountLoading(true);
+
             if (isEditing) {
+                setEditAccountLoading(true);
                 const response = await axios.put(`http://localhost:8000/api/accounts/${accountId}/edit`, values);
                 setEditAccountSuccess(true);
             } else {
-                const response = await axios.post('http://localhost:8000/api/accounts', {...values});
+                setAddAccountLoading(true);
+                const response = await axios.post('http://localhost:8000/api/accounts', { ...values });
                 setAddAccountSuccess(true);
             }
         } catch (error) {
@@ -160,7 +183,7 @@ export const AddAccounts = () => {
                                 <Field
                                     id="password"
                                     name="password"
-                                    placeholder="Password123!"
+                                    placeholder={account.password}
                                     disabled={false}
                                     className={`mt-2 p-2 w-full rounded shadow-inner ${errors.password && touched.password
                                         ? "border-red-500 border-2"
@@ -184,7 +207,6 @@ export const AddAccounts = () => {
                                     id="role"
                                     name="role"
                                     disabled={false}
-                                    value={account.role}
                                     className={`mt-2 p-2 w-full rounded shadow-inner ${errors.role && touched.role
                                         ? "border-red-500 border-2"
                                         : "border"
@@ -206,8 +228,8 @@ export const AddAccounts = () => {
                                 type="submit"
                                 disabled={addAccountLoading || editAccountLoading}
                                 className="w-full h-10 p-2 bg-blue-600 text-white font-semibold rounded-lg disabled:opacity-80 flex items-center justify-center"
-                            >
-                                {isEditing ? "Update" : "Save"}
+                            >   (isEditing ? "Update" : "Save")
+                                {/* {setEditAccountLoading || setAddAccountLoading ? <Loading /> : (isEditing ? "Update" : "Save")} */}
                             </button>
                         </Form>
                     </div>
