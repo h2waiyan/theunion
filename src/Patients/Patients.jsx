@@ -52,11 +52,11 @@ const Patients = ({ vot_table }) => {
       setLoading(true);
       if (vot_table) {
         const response = await axios.get(
-          "https://cors-everywhere.herokuapp.com/http://128.199.235.134/api/vot_patients"
+          "http://128.199.235.134/api/vot_patients"
         );
         setPatients(response.data["patients"]);
       } else {
-        const response = await axios.get("https://cors-everywhere.herokuapp.com/http://128.199.235.134/api/patients");
+        const response = await axios.get("http://128.199.235.134/api/patients");
         setPatients(response.data["patients"]);
       }
     } catch (error) {
@@ -74,7 +74,7 @@ const Patients = ({ vot_table }) => {
     try {
       setDeleteLoading(true);
       const response = await axios.delete(
-        "https://cors-everywhere.herokuapp.com/http://128.199.235.134/api/patients/" + data.id + "/delete"
+        "http://128.199.235.134/api/patients/" + data.id + "/delete"
       );
     } catch (error) {
       setError(error);
@@ -93,7 +93,7 @@ const Patients = ({ vot_table }) => {
 
   const getVolunteers = async () => {
     try {
-      const response = await axios.get("https://cors-everywhere.herokuapp.com/http://128.199.235.134/api/volunteers");
+      const response = await axios.get("http://128.199.235.134/api/volunteers");
       setVolunteers(response.data["volunteers"]);
     } catch (error) {
       console.error(error);
