@@ -77,10 +77,10 @@ export const AddVolunteer = () => {
         try {
             setAddVolunteerLoading(true);
             if (isEditing) {
-                const response = await axios.put(`http://127.0.0.1:8000/api/volunteers/${volunteerId}/edit`, values);
+                const response = await axios.put(`http://128.199.235.134/api/volunteers/${volunteerId}/edit`, values);
                 setEditVolunteerSuccess(true);
             } else {
-                const response = await axios.post('http://127.0.0.1:8000/api/volunteers', {...values});
+                const response = await axios.post('http://128.199.235.134/api/volunteers', {...values});
                 setAddVolunteerSuccess(true);
             }
         } catch (error) {

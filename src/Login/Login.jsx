@@ -27,7 +27,7 @@ export const Login = () => {
     async function login(values) {
         try {
             setLoading(true);
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/login', {
+            const response = await axios.post('http://128.199.235.134/api/auth/login', {
                 email : values['username'],
                 password : values['password']
             });
