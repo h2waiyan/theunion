@@ -1,0 +1,365 @@
+{
+  "collection": {
+    "info": {
+      "_postman_id": "8af72070-be5a-4c78-a61f-d4cdbf2d0bb5",
+      "name": "React-Entry",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "updatedAt": "2023-12-19T14:24:22.000Z",
+      "uid": "12577500-8af72070-be5a-4c78-a61f-d4cdbf2d0bb5"
+    },
+    "item": [
+      {
+        "name": "get sectors",
+        "id": "cbe7104b-8913-4556-9309-afec65776d74",
+        "protocolProfileBehavior": { "disableBodyPruning": true },
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:3000/api/v1/sector",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "sector"]
+          }
+        },
+        "response": [
+          {
+            "id": "2d4f2b2e-84b0-4c5b-bc74-fc44c4944817",
+            "name": "get sectors",
+            "originalRequest": {
+              "method": "POST",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:3000/api/entry/sectors",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "entry", "sectors"]
+              }
+            },
+            "status": "OK",
+            "code": 200,
+            "_postman_previewlanguage": "json",
+            "header": [
+              { "key": "X-Powered-By", "value": "Express" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" },
+              { "key": "Vary", "value": "X-HTTP-Method-Override" },
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              },
+              { "key": "Content-Length", "value": "4693" },
+              {
+                "key": "ETag",
+                "value": "W/\"1255-//GI2nC0xVAqsFkHoexc2FOY/fo\""
+              },
+              { "key": "Date", "value": "Mon, 18 Dec 2023 09:18:40 GMT" },
+              { "key": "Connection", "value": "keep-alive" },
+              { "key": "Keep-Alive", "value": "timeout=5" }
+            ],
+            "cookie": [],
+            "responseTime": null,
+            "body": "{\n    \"returncode\": \"200\",\n    \"message\": \"Sector List\",\n    \"data\": [\n        {\n            \"sectorid\": \"1\",\n            \"name\": \"Manufacturing\",\n            \"children\": [\n                {\n                    \"sectorid\": \"19\",\n                    \"name\": \"Construction materials\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"18\",\n                    \"name\": \"Electronics and Optics\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"6\",\n                    \"name\": \"Food and Beverage\",\n                    \"children\": [\n                        {\n                            \"sectorid\": \"342\",\n                            \"name\": \"Bakery &amp; confectionery products\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"43\",\n                            \"name\": \"Beverages\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"42\",\n                            \"name\": \"Fish &amp; fish products\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"40\",\n                            \"name\": \"Meat &amp; meat products\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"39\",\n                            \"name\": \"Milk &amp; dairy products\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"437\",\n                            \"name\": \"Other\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"378\",\n                            \"name\": \"Sweets &amp; snack food\",\n                            \"children\": []\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"13\",\n            \"name\": \"Furniture\",\n            \"children\": [\n                {\n                    \"sectorid\": \"389\",\n                    \"name\": \"Bathroom/sauna\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"385\",\n                    \"name\": \"Bedroom\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"390\",\n                    \"name\": \"Children’s room\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"98\",\n                    \"name\": \"Kitchen\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"101\",\n                    \"name\": \"Living room\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"392\",\n                    \"name\": \"Office\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"394\",\n                    \"name\": \"Other (Furniture)\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"341\",\n                    \"name\": \"Outdoor\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"99\",\n                    \"name\": \"Project furniture\",\n                    \"children\": []\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"12\",\n            \"name\": \"Machinery\",\n            \"children\": [\n                {\n                    \"sectorid\": \"94\",\n                    \"name\": \"Machinery components\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"91\",\n                    \"name\": \"Machinery equipment/tools\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"224\",\n                    \"name\": \"Manufacture of machinery\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"97\",\n                    \"name\": \"Maritime\",\n                    \"children\": [\n                        {\n                            \"sectorid\": \"271\",\n                            \"name\": \"Aluminium and steel workboats\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"269\",\n                            \"name\": \"Boat/Yacht building\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"230\",\n                            \"name\": \"Ship repair and conversion\",\n                            \"children\": []\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"11\",\n            \"name\": \"Metalworking\",\n            \"children\": [\n                {\n                    \"sectorid\": \"93\",\n                    \"name\": \"Metal structures\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"508\",\n                    \"name\": \"Other\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"227\",\n                    \"name\": \"Repair and maintenance service\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"67\",\n                    \"name\": \"Construction of metal structures\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"263\",\n                    \"name\": \"Houses and buildings\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"267\",\n                    \"name\": \"Metal products\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"542\",\n                    \"name\": \"Metal works\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"75\",\n                    \"name\": \"CNC-machining\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"62\",\n                    \"name\": \"Forgings, Fasteners\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"69\",\n                    \"name\": \"Gas, Plasma, Laser cutting\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"66\",\n                    \"name\": \"MIG, TIG, Aluminum welding\",\n                    \"children\": []\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"9\",\n            \"name\": \"Plastic and Rubber\",\n            \"children\": [\n                {\n                    \"sectorid\": \"54\",\n                    \"name\": \"Packaging\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"556\",\n                    \"name\": \"Plastic goods\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"559\",\n                    \"name\": \"Plastic processing technology\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"55\",\n                    \"name\": \"Blowing\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"57\",\n                    \"name\": \"Moulding\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"53\",\n                    \"name\": \"Plastics welding and processing\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"560\",\n                    \"name\": \"Plastic profiles\",\n                    \"children\": []\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"5\",\n            \"name\": \"Printing\",\n            \"children\": [\n                {\n                    \"sectorid\": \"148\",\n                    \"name\": \"Advertising\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"150\",\n                    \"name\": \"Book/Periodicals printing\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"145\",\n                    \"name\": \"Labelling and packaging printing\",\n                    \"children\": []\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"7\",\n            \"name\": \"Textile and Clothing\",\n            \"children\": [\n                {\n                    \"sectorid\": \"44\",\n                    \"name\": \"Clothing\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"45\",\n                    \"name\": \"Textile\",\n                    \"children\": []\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"8\",\n            \"name\": \"Wood\",\n            \"children\": [\n                {\n                    \"sectorid\": \"337\",\n                    \"name\": \"Other (Wood)\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"51\",\n                    \"name\": \"Wooden building materials\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"47\",\n                    \"name\": \"Wooden houses\",\n                    \"children\": []\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"3\",\n            \"name\": \"Other\",\n            \"children\": [\n                {\n                    \"sectorid\": \"37\",\n                    \"name\": \"Creative industries\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"29\",\n                    \"name\": \"Energy technology\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"33\",\n                    \"name\": \"Environment\",\n                    \"children\": []\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"2\",\n            \"name\": \"Service\",\n            \"children\": [\n                {\n                    \"sectorid\": \"25\",\n                    \"name\": \"Business services\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"35\",\n                    \"name\": \"Engineering\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"28\",\n                    \"name\": \"Information Technology and Telecommunications\",\n                    \"children\": [\n                        {\n                            \"sectorid\": \"581\",\n                            \"name\": \"Data processing, Web portals, E-marketing\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"576\",\n                            \"name\": \"Programming, Consultancy\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"121\",\n                            \"name\": \"Software, Hardware\",\n                            \"children\": []\n                        },\n                        {\n                            \"sectorid\": \"122\",\n                            \"name\": \"Telecommunications\",\n                            \"children\": []\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"22\",\n            \"name\": \"Tourism\",\n            \"children\": [\n                {\n                    \"sectorid\": \"141\",\n                    \"name\": \"Translation services\",\n                    \"children\": []\n                }\n            ]\n        },\n        {\n            \"sectorid\": \"21\",\n            \"name\": \"Transport and Logistics\",\n            \"children\": [\n                {\n                    \"sectorid\": \"111\",\n                    \"name\": \"Air\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"114\",\n                    \"name\": \"Rail\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"112\",\n                    \"name\": \"Road\",\n                    \"children\": []\n                },\n                {\n                    \"sectorid\": \"113\",\n                    \"name\": \"Water\",\n                    \"children\": []\n                }\n            ]\n        }\n    ]\n}",
+            "uid": "12577500-2d4f2b2e-84b0-4c5b-bc74-fc44c4944817"
+          }
+        ],
+        "uid": "12577500-cbe7104b-8913-4556-9309-afec65776d74"
+      },
+      {
+        "name": "entry add",
+        "id": "20f9290b-5717-4729-8058-14b9f95bbd1d",
+        "protocolProfileBehavior": { "disableBodyPruning": true },
+        "request": {
+          "method": "POST",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"name\": \"Eren\",\n    \"sectors\": [342,43],\n    \"agreetoterms\": true\n}",
+            "options": { "raw": { "language": "json" } }
+          },
+          "url": {
+            "raw": "http://localhost:3000/api/v1/entry",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "entry"]
+          }
+        },
+        "response": [
+          {
+            "id": "ff6656e1-6f9f-49df-b16a-461aa72b7b64",
+            "name": "entry add",
+            "originalRequest": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"name\": \"Eren\",\n    \"sectors\": [342,43],\n    \"agreetoterms\": true\n}",
+                "options": { "raw": { "language": "json" } }
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/entry/add",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "entry", "add"]
+              }
+            },
+            "status": "Created",
+            "code": 201,
+            "_postman_previewlanguage": "json",
+            "header": [
+              { "key": "X-Powered-By", "value": "Express" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" },
+              { "key": "Vary", "value": "X-HTTP-Method-Override" },
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              },
+              { "key": "Content-Length", "value": "283" },
+              {
+                "key": "ETag",
+                "value": "W/\"11b-yt/pTpIMLSaIXLsqnww7+waVOgg\""
+              },
+              { "key": "Date", "value": "Mon, 18 Dec 2023 09:34:38 GMT" },
+              { "key": "Connection", "value": "keep-alive" },
+              { "key": "Keep-Alive", "value": "timeout=5" }
+            ],
+            "cookie": [],
+            "responseTime": null,
+            "body": "{\n    \"returncode\": \"200\",\n    \"message\": \"Created successfully.\",\n    \"data\": [\n        {\n            \"id\": 5,\n            \"name\": \"Eren\",\n            \"entryid\": \"191e1d8c-1443-48c4-af13-a3dad13ca679\",\n            \"sectorid\": \"db0c2406-a2e5-44cb-83a8-3c270b7d2a70\",\n            \"agreetoterms\": true,\n            \"updatedAt\": \"2023-12-18T09:34:38.098Z\",\n            \"createdAt\": \"2023-12-18T09:34:38.098Z\"\n        }\n    ]\n}",
+            "uid": "12577500-ff6656e1-6f9f-49df-b16a-461aa72b7b64"
+          }
+        ],
+        "uid": "12577500-20f9290b-5717-4729-8058-14b9f95bbd1d"
+      },
+      {
+        "name": "get entry list",
+        "id": "3270fc34-064b-4bff-892e-58803349204a",
+        "protocolProfileBehavior": { "disableBodyPruning": true },
+        "request": {
+          "method": "GET",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \n}",
+            "options": { "raw": { "language": "json" } }
+          },
+          "url": {
+            "raw": "http://localhost:3000/api/v1/entry",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "entry"]
+          }
+        },
+        "response": [
+          {
+            "id": "87664f1f-ccee-4487-837b-cfc4b5361b93",
+            "name": "get entry list",
+            "originalRequest": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \n}",
+                "options": { "raw": { "language": "json" } }
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/entry/get",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "entry", "get"]
+              }
+            },
+            "status": "OK",
+            "code": 200,
+            "_postman_previewlanguage": "json",
+            "header": [
+              { "key": "X-Powered-By", "value": "Express" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" },
+              { "key": "Vary", "value": "X-HTTP-Method-Override" },
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              },
+              { "key": "Content-Length", "value": "305" },
+              {
+                "key": "ETag",
+                "value": "W/\"131-7EaUXQaSx+5xH8ZllNwWPfd6AN0\""
+              },
+              { "key": "Date", "value": "Mon, 18 Dec 2023 09:34:40 GMT" },
+              { "key": "Connection", "value": "keep-alive" },
+              { "key": "Keep-Alive", "value": "timeout=5" }
+            ],
+            "cookie": [],
+            "responseTime": null,
+            "body": "{\n    \"returncode\": \"200\",\n    \"message\": \"Entry List\",\n    \"finalList\": [\n        {\n            \"entryid\": \"191e1d8c-1443-48c4-af13-a3dad13ca679\",\n            \"name\": \"Eren\",\n            \"sectorid\": \"db0c2406-a2e5-44cb-83a8-3c270b7d2a70\",\n            \"agreetoterms\": true,\n            \"sectors\": [\n                {\n                    \"sectorid\": \"342\",\n                    \"name\": \"Bakery &amp; confectionery products\"\n                },\n                {\n                    \"sectorid\": \"43\",\n                    \"name\": \"Beverages\"\n                }\n            ]\n        }\n    ]\n}",
+            "uid": "12577500-87664f1f-ccee-4487-837b-cfc4b5361b93"
+          }
+        ],
+        "uid": "12577500-3270fc34-064b-4bff-892e-58803349204a"
+      },
+      {
+        "name": "update entry",
+        "id": "0d15e342-e735-47a7-b138-358750d062f6",
+        "protocolProfileBehavior": { "disableBodyPruning": true },
+        "request": {
+          "method": "PUT",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"entryid\" : \"203670e9-4933-46f6-8643-e3b9aa9f2aeb\",\n    \"name\": \"Luffytaro\",\n    \"sectors\": [\n        51,\n        2,\n        113,\n        112\n    ],\n    \"agreetoterms\": true\n}",
+            "options": { "raw": { "language": "json" } }
+          },
+          "url": {
+            "raw": "http://localhost:3000/api/v1/entry",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "entry"]
+          }
+        },
+        "response": [
+          {
+            "id": "3e3b4903-0cff-49f6-8fa9-dd4799f52b8c",
+            "name": "update entry",
+            "originalRequest": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"entryid\" : \"191e1d8c-1443-48c4-af13-a3dad13ca679\",\n    \"name\": \"Luffytaro\",\n    \"sectors\": [\n        51,\n        2,\n        113,\n        112\n    ],\n    \"agreetoterms\": true\n}",
+                "options": { "raw": { "language": "json" } }
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/entry/update",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "entry", "update"]
+              }
+            },
+            "status": "Created",
+            "code": 201,
+            "_postman_previewlanguage": "json",
+            "header": [
+              { "key": "X-Powered-By", "value": "Express" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" },
+              { "key": "Vary", "value": "X-HTTP-Method-Override" },
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              },
+              { "key": "Content-Length", "value": "64" },
+              {
+                "key": "ETag",
+                "value": "W/\"40-Z9gwTlhEwcJLfDhzlZWZjNLZoNQ\""
+              },
+              { "key": "Date", "value": "Mon, 18 Dec 2023 10:42:51 GMT" },
+              { "key": "Connection", "value": "keep-alive" },
+              { "key": "Keep-Alive", "value": "timeout=5" }
+            ],
+            "cookie": [],
+            "responseTime": null,
+            "body": "{\n    \"returncode\": \"200\",\n    \"message\": \"Updated successfully.\",\n    \"data\": []\n}",
+            "uid": "12577500-3e3b4903-0cff-49f6-8fa9-dd4799f52b8c"
+          }
+        ],
+        "uid": "12577500-0d15e342-e735-47a7-b138-358750d062f6"
+      },
+      {
+        "name": "delete entry",
+        "id": "8ee456db-8538-46a6-94e3-5bf1ad5dfe6e",
+        "protocolProfileBehavior": { "disableBodyPruning": true },
+        "request": {
+          "method": "DELETE",
+          "header": [],
+          "body": {
+            "mode": "raw",
+            "raw": "",
+            "options": { "raw": { "language": "json" } }
+          },
+          "url": {
+            "raw": "http://localhost:3000/api/v1/entry/203670e9-4933-46f6-8643-e3b9aa9f2aeb",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": [
+              "api",
+              "v1",
+              "entry",
+              "203670e9-4933-46f6-8643-e3b9aa9f2aeb"
+            ]
+          }
+        },
+        "response": [
+          {
+            "id": "997003c8-f752-4fb4-b8e6-9c24c5457270",
+            "name": "New Request",
+            "originalRequest": {
+              "method": "DELETE",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "",
+                "options": { "raw": { "language": "json" } }
+              },
+              "url": {
+                "raw": "http://localhost:3000/api/entry/203670e9-4933-46f6-8643-e3b9aa9f2aeb",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["api", "entry", "203670e9-4933-46f6-8643-e3b9aa9f2aeb"]
+              }
+            },
+            "status": "OK",
+            "code": 200,
+            "_postman_previewlanguage": "json",
+            "header": [
+              { "key": "X-Powered-By", "value": "Express" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" },
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              },
+              { "key": "Content-Length", "value": "64" },
+              {
+                "key": "ETag",
+                "value": "W/\"40-MQsGoCr79r/FRR2uUHyVeVS7IIs\""
+              },
+              { "key": "Date", "value": "Tue, 19 Dec 2023 14:10:02 GMT" },
+              { "key": "Connection", "value": "keep-alive" },
+              { "key": "Keep-Alive", "value": "timeout=5" }
+            ],
+            "cookie": [],
+            "responseTime": null,
+            "body": "{\n    \"returncode\": \"200\",\n    \"message\": \"Deleted successfully.\",\n    \"data\": []\n}",
+            "uid": "12577500-997003c8-f752-4fb4-b8e6-9c24c5457270"
+          }
+        ],
+        "uid": "12577500-8ee456db-8538-46a6-94e3-5bf1ad5dfe6e"
+      },
+      {
+        "name": "delete all entry",
+        "id": "20aeaa95-e272-4bfd-8f11-e9677b83342f",
+        "protocolProfileBehavior": { "disableBodyPruning": true },
+        "request": {
+          "method": "DELETE",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:3000/api/v1/entry",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "3000",
+            "path": ["api", "v1", "entry"]
+          }
+        },
+        "response": [],
+        "uid": "12577500-20aeaa95-e272-4bfd-8f11-e9677b83342f"
+      }
+    ]
+  }
+}
