@@ -77,10 +77,10 @@ export const AddVolunteer = () => {
         try {
             setAddVolunteerLoading(true);
             if (isEditing) {
-                const response = await axios.put(`http://localhost:8000/api/volunteers/${volunteerId}/edit`, values);
+                const response = await axios.put(`http://127.0.0.1:8000/api/volunteers/${volunteerId}/edit`, values);
                 setEditVolunteerSuccess(true);
             } else {
-                const response = await axios.post('http://localhost:8000/api/volunteers', {...values});
+                const response = await axios.post('http://127.0.0.1:8000/api/volunteers', {...values});
                 setAddVolunteerSuccess(true);
             }
         } catch (error) {
@@ -110,7 +110,7 @@ export const AddVolunteer = () => {
                             </h1>
                         </div>
 
-                        <Form className="w-1/4 mx-auto mt-5 px-4 py-5 bg-white-300 rounded-lg shadow-md">
+                        <Form className="w-1/3 mx-auto mt-5 px-4 py-5 bg-white-300 rounded-lg shadow-md">
                             <div className="mb-4">
                                 <label htmlFor="name" className="block text-gray-800 font-bold">
                                     Name

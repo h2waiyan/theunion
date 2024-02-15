@@ -1,6 +1,4 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import AddData from "./AddEntry/AddEntry";
-import EntriesList from "./EntriesList/EntriesList";
 import Navbar from "./Navbar/Navbar";
 import NotFound from "./NotFoundPage/NotFound";
 import Loading from "./Loading/Loading";

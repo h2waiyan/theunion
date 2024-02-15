@@ -99,11 +99,11 @@ export const AddAccounts = () => {
 
             if (isEditing) {
                 setEditAccountLoading(true);
-                const response = await axios.put(`http://localhost:8000/api/accounts/${accountId}/edit`, values);
+                const response = await axios.put(`http://127.0.0.1:8000/api/accounts/${accountId}/edit`, values);
                 setEditAccountSuccess(true);
             } else {
                 setAddAccountLoading(true);
-                const response = await axios.post('http://localhost:8000/api/accounts', { ...values });
+                const response = await axios.post('http://127.0.0.1:8000/api/accounts', { ...values });
                 setAddAccountSuccess(true);
             }
         } catch (error) {
@@ -133,7 +133,7 @@ export const AddAccounts = () => {
                             </h1>
                         </div>
 
-                        <Form className="w-1/4 mx-auto mt-5 px-4 py-5 bg-white-300 rounded-lg shadow-md">
+                        <Form className="w-1/3 mx-auto mt-5 px-4 py-5 bg-white-300 rounded-lg shadow-md">
                             <div className="mb-4">
                                 <label htmlFor="name" className="block text-gray-800 font-bold">
                                     Name
@@ -228,8 +228,7 @@ export const AddAccounts = () => {
                                 type="submit"
                                 disabled={addAccountLoading || editAccountLoading}
                                 className="w-full h-10 p-2 bg-blue-600 text-white font-semibold rounded-lg disabled:opacity-80 flex items-center justify-center"
-                            >   (isEditing ? "Update" : "Save")
-                                {/* {setEditAccountLoading || setAddAccountLoading ? <Loading /> : (isEditing ? "Update" : "Save")} */}
+                            >   {isEditing ? "Update" : "Save"}
                             </button>
                         </Form>
                     </div>
