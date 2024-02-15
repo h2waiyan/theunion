@@ -99,11 +99,11 @@ export const AddAccounts = () => {
 
             if (isEditing) {
                 setEditAccountLoading(true);
-                const response = await axios.put(`http://128.199.235.134/api/accounts/${accountId}/edit`, values);
+                const response = await axios.put(`https://cors-everywhere.herokuapp.com/http://128.199.235.134/api/accounts/${accountId}/edit`, values);
                 setEditAccountSuccess(true);
             } else {
                 setAddAccountLoading(true);
-                const response = await axios.post('http://128.199.235.134/api/accounts', { ...values });
+                const response = await axios.post('https://cors-everywhere.herokuapp.com/http://128.199.235.134/api/accounts', { ...values });
                 setAddAccountSuccess(true);
             }
         } catch (error) {

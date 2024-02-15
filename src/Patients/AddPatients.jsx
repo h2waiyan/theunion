@@ -108,7 +108,7 @@ export const AddPatient = ({ move_to_vot }) => {
 
   const getVolunteers = async () => {
     try {
-      const response = await axios.get("http://128.199.235.134/api/volunteers");
+      const response = await axios.get("https://cors-everywhere.herokuapp.com/http://128.199.235.134/api/volunteers");
       setVolunteers(response.data["volunteers"]);
     } catch (error) {
       console.error(error);
@@ -171,7 +171,7 @@ export const AddPatient = ({ move_to_vot }) => {
       if (isEditing) {
         console.log(values);
         const response = await axios.put(
-          `http://128.199.235.134/api/patients/${patientId}/edit`,
+          `https://cors-everywhere.herokuapp.com/http://128.199.235.134/api/patients/${patientId}/edit`,
           {
             ...values,
             "is_vot_patient" : move_to_vot ? true : false,
@@ -182,7 +182,7 @@ export const AddPatient = ({ move_to_vot }) => {
         setEditPatientSuccess(true);
       } else {
         const response = await axios.post(
-          "http://128.199.235.134/api/patients",
+          "https://cors-everywhere.herokuapp.com/http://128.199.235.134/api/patients",
           {
             ...values,
             "volunteer_id" : values.referredBy,
