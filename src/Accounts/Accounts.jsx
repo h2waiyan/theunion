@@ -45,11 +45,11 @@ const Accounts = () => {
 
     // Pagination
     const [activePage, setActivePage] = useState(1);
-    const itemsCountPerPage = 35;
+    const itemsCountPerPage = 10;
     const totalItemsCount = accounts.length;
     const indexOfLastItem = activePage * itemsCountPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsCountPerPage;
-    const currentEntries = accounts.slice(indexOfFirstItem, indexOfLastItem);
+    const currentAccounts = accounts.slice(indexOfFirstItem, indexOfLastItem);
 
     useEffect(() => {
         getAccounts();
@@ -94,7 +94,7 @@ const Accounts = () => {
                     </thead>
 
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {accounts.map((account, index) => (
+                        {currentAccounts.map((account, index) => (
                             <tr
                                 className={index % 2 === 0 ? "bg-white" : "bg-slate-100"}
                                 key={account.id}
@@ -131,7 +131,7 @@ const Accounts = () => {
                     </tbody>
                 </table>
             </div>
-            {accounts.length === 0 && (
+            {currentAccounts.length === 0 && (
                 <p className="flex justify-center text-center p-3 m-3">No Data</p>
             )}
             <div className="flex flex-row justify-center my-4">

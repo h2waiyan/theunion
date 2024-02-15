@@ -80,7 +80,6 @@ export const AddAccounts = () => {
                 const response = await axios.put(`http://localhost:8000/api/accounts/${accountId}/edit`, values);
                 setEditAccountSuccess(true);
             } else {
-                console.log(values);
                 const response = await axios.post('http://localhost:8000/api/accounts', {...values});
                 setAddAccountSuccess(true);
             }

@@ -60,7 +60,7 @@ const Volunteers = () => {
     const totalItemsCount = volunteers.length;
     const indexOfLastItem = activePage * itemsCountPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsCountPerPage;
-    const currentEntries = volunteers.slice(indexOfFirstItem, indexOfLastItem);
+    const currentVolunteers = volunteers.slice(indexOfFirstItem, indexOfLastItem);
 
     useEffect(() => {
         getVolunteers();
@@ -105,7 +105,7 @@ const Volunteers = () => {
                     </thead>
 
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {volunteers.map((volunteer, index) => (
+                        {currentVolunteers.map((volunteer, index) => (
                             <tr
                                 className={index % 2 === 0 ? "bg-white" : "bg-slate-100"}
                                 key={volunteer.id}
@@ -140,7 +140,7 @@ const Volunteers = () => {
                     </tbody>
                 </table>
             </div>
-            {volunteers.length === 0 && (
+            {currentVolunteers.length === 0 && (
                 <p className="flex justify-center text-center p-3 m-3">No Data</p>
             )}
             <div className="flex flex-row justify-center my-4">

@@ -32,6 +32,8 @@ export const Login = () => {
                 password : values['password']
             });
             toast.success("Login Successful");
+            localStorage.setItem('token', response.data.access_token);
+            localStorage.setItem('role', response.data.role);
             navigate('/accounts');
         } catch (error) {
             setError(error);

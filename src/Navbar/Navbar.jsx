@@ -24,6 +24,9 @@ const Navbar = () => {
         <NavLink to="/vot-patients" className="text-white text-xs md:text-lg">
           VOT Patients
         </NavLink>
+        <NavLink to="/" className="text-white text-xs md:text-lg">
+          Logout
+        </NavLink>
       </div>
     </div>
   );

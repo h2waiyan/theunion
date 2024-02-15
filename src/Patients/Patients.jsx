@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 // MDR,XDR,Other))
 
 // township {/* (CAT,CMT,PTG,PGT,AMT,MHA,AMP) */}
-const Township =  {
+const Township = {
     1: "CAT",
     2: "CMT",
     3: "PTG",
@@ -34,10 +34,9 @@ const Township =  {
     7: "AMP"
 }
 
-const Patients = () => {
+const Patients = (vot_table) => {
 
     const navigate = useNavigate();
-
 
     const [patients, setPatients] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -46,8 +45,13 @@ const Patients = () => {
     const getPatients = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('http://localhost:8000/api/patients');
-            setPatients(response.data['patients']);
+            if (vot_table) {
+                const response = await axios.get('http://localhost:8000/api/vot_patients');
+                setPatients(response.data['patients']);
+            } else {
+                const response = await axios.get('http://localhost:8000/api/patients');
+                setPatients(response.data['patients']);
+            }
         } catch (error) {
             setError(error);
         } finally {
@@ -77,7 +81,7 @@ const Patients = () => {
     const totalItemsCount = patients.length;
     const indexOfLastItem = activePage * itemsCountPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsCountPerPage;
-    const currentEntries = patients.slice(indexOfFirstItem, indexOfLastItem);
+    const currentPatients = patients.slice(indexOfFirstItem, indexOfLastItem);
 
     useEffect(() => {
         getPatients();
@@ -110,7 +114,7 @@ const Patients = () => {
                                 Name
                             </th>
                             <th scope="col" className="p-3">
-                                Registration Number
+                                Registration Year
                             </th>
                             <th scope="col" className="p-3">
                                 DOB
@@ -139,6 +143,30 @@ const Patients = () => {
                             <th scope="col" className="p-3">
                                 Treatment Regimen
                             </th>
+                            {!vot_table && <th scope="col" className="p-3">
+                                Move to VOT
+                            </th>}
+                            {
+                                vot_table &&
+
+                                <th scope="col" className="p-3">
+                                    VOT Type
+                                </th>
+                            }
+                             {
+                                vot_table &&
+
+                                <th scope="col" className="p-3">
+                                    VOT Start Date
+                                </th>
+                            }
+                             {
+                                vot_table &&
+
+                                <th scope="col" className="p-3">
+                                    Volunteer
+                                </th>
+                            }
                             <th scope="col" className="p-3">
                                 Actions
                             </th>
@@ -146,15 +174,15 @@ const Patients = () => {
                     </thead>
 
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {patients.map((patient, index) => (
+                        {currentPatients.map((patient, index) => (
                             <tr
                                 className={index % 2 === 0 ? "bg-white" : "bg-slate-100"}
                                 key={patient.id}
                             >
                                 <td className="p-3">{index + 1}</td>
-                                <td className="p-3">{volpatientunteer.name}</td>
+                                <td className="p-3">{patient.name}</td>
                                 <td className="p-3">
-                                    {patient.registration_year}
+                                    {patient.reg_year}
                                 </td>
                                 <td className="p-3">
                                     {patient.dob}
@@ -184,6 +212,33 @@ const Patients = () => {
                                     {patient.treatment_regimen}
                                 </td>
 
+                                {!vot_table && <td className="p-3">
+                                    <button
+                                        onClick={() => {
+                                            navigate(`/move-to-vot/${patient.id}`, { state: patient });
+                                        }}
+                                        className="bg-custom-blue text-white px-4 py-2 rounded">
+                                        Move to VOT
+                                    </button>
+                                </td>
+                                }
+
+
+                                {vot_table && <td className="p-3">
+                                    {patient.vot_type}
+                                </td>
+                                }
+
+                                {vot_table && <td className="p-3">
+                                    {patient.vot_start_date}
+                                </td>
+                                }
+
+                                {vot_table && <td className="p-3">
+                                    {patient.vot_date}
+                                </td>
+                                }
+
                                 <td className="flex flex-row p-3">
                                     <MdEdit
                                         className="hover:text-yellow-500 hover:cursor-pointer"
@@ -206,7 +261,7 @@ const Patients = () => {
                     </tbody>
                 </table>
             </div>
-            {patients.length === 0 && (
+            {currentPatients.length === 0 && (
                 <p className="flex justify-center text-center p-3 m-3">No Data</p>
             )}
             <div className="flex flex-row justify-center my-4">
