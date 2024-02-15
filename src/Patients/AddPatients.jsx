@@ -45,7 +45,6 @@ let votPatientSchema = object({
   treatment_start_date: string().required("Treatment Start Date is required."),
   treatment_regimen: string().required("Treatment Regimen is required."),
   vot_type: string().required("VOT Type is required."),
-  vot_id: number().required("Volunteer is required."),
   vot_start_date: string().required("VOT Start Date is required."),
 });
 
@@ -68,10 +67,6 @@ const generatePassword = () => {
   // Generate a random integer between 100000 and 999999 (inclusive)
   const password = Math.floor(Math.random() * 900000) + 100000;
   return password.toString(); // Convert the integer to a string
-};
-
-const getPatientCode = () => {
-  return "patientCode";
 };
 
 export const AddPatient = ({ move_to_vot }) => {
@@ -179,7 +174,9 @@ export const AddPatient = ({ move_to_vot }) => {
           `http://127.0.0.1:8000/api/patients/${patientId}/edit`,
           {
             ...values,
+            "is_vot_patient" : move_to_vot ? true : false,
             "volunteer_id" : values.referredBy,
+            "referred_by_volunteer": values.referredBy
           }
         );
         setEditPatientSuccess(true);
@@ -205,15 +202,14 @@ export const AddPatient = ({ move_to_vot }) => {
     <div className="flex justify-center items-center h-45">
       <Formik
         initialValues={patient}
-        validationSchema={move_to_vot ? votPatientSchema : patientSchema}
+        // validationSchema={move_to_vot ? votPatientSchema : patientSchema}
         enableReinitialize={true}
         onSubmit={async (values) => {
-          console.log(values);
           setPatient(values);
           await addPatient(values, isEditing);
         }}
       >
-        {({ values, handleChange, errors, touched }) => (
+        {({ values, handleChange, errors, touched, setFieldValue }) => (
           <div className="w-full">
             <div className="p-3">
               <h1 className="text-lg text-center mx-3 font-bold">
@@ -261,6 +257,10 @@ export const AddPatient = ({ move_to_vot }) => {
                       id="reg_year"
                       name="reg_year"
                       disabled={false}
+                      onChange={() => {
+                        setFieldValue("patient_code", `${values.drtb_code}/${Township[values.township]}/${values.reg_year}`);
+                        setFieldValue("reg_year", event.target.value);
+                      }}
                       className={`mt-2 p-2 w-full rounded shadow-inner ${errors.reg_year && touched.reg_year
                           ? "border-red-500 border-2"
                           : "border"
@@ -294,7 +294,10 @@ export const AddPatient = ({ move_to_vot }) => {
                       id="dob"
                       name="dob"
                       placeholder="2023-12-31"
-                      onChange={handleChange}
+                      onChange={(event) => {
+                        setFieldValue("age", calculateAge(event.target.value));
+                        setFieldValue("dob", event.target.value);
+                      }}
                       disabled={false}
                       className={`mt-2 p-2 w-full rounded shadow-inner ${errors.dob && touched.dob
                           ? "border-red-500 border-2"
@@ -345,6 +348,10 @@ export const AddPatient = ({ move_to_vot }) => {
                       name="drtb_code"
                       placeholder="123"
                       disabled={false}
+                      onChange={() => {
+                        setFieldValue("patient_code", `${values.drtb_code}/${Township[values.township]}/${values.reg_year}`);
+                        setFieldValue("drtb_code", event.target.value);
+                      }}
                       className={`mt-2 p-2 w-full rounded shadow-inner ${errors.drtb_code && touched.drtb_code
                           ? "border-red-500 border-2"
                           : "border"
@@ -394,7 +401,10 @@ export const AddPatient = ({ move_to_vot }) => {
                       id="township"
                       name="township"
                       disabled={false}
-                      onChange={handleChange}
+                      onChange={() => {
+                        setFieldValue("patient_code", `${values.drtb_code}/${Township[values.township]}/${values.reg_year}`);
+                        setFieldValue("township", event.target.value);
+                      }}
                       className={`mt-2 p-2 w-full rounded shadow-inner ${errors.township && touched.township
                           ? "border-red-500 border-2"
                           : "border"
@@ -590,9 +600,9 @@ export const AddPatient = ({ move_to_vot }) => {
                           : "border"
                         }`}
                     >
-                      <option value="">Select VOT Type</option>
-                      <option value="pure">Pure</option>
-                      <option value="hybird">Hybird</option>
+                      <option value="vot_type">Select VOT Type</option>
+                      <option value="Pure">Pure</option>
+                      <option value="Hybrid">Hybrid</option>
                     </Field>
                     <ErrorMessage
                       component="div"
@@ -602,24 +612,37 @@ export const AddPatient = ({ move_to_vot }) => {
                   </div>
                   <div className="mb-4">
                     <label
-                      htmlFor="vot_id"
+                      htmlFor="referredBy"
                       className="block text-gray-800 font-bold"
                     >
-                      Volunteer
+                      Referred By
                     </label>
+                    {/* // dropdown of the volunteers */}
                     <Field
-                      id="vot_id"
-                      name="vot_id"
-                      placeholder="123"
+                      as="select"
+                      id="referredBy"
+                      name="referredBy"
                       disabled={false}
-                      className={`mt-2 p-2 w-full rounded shadow-inner ${errors.vot_id && touched.vot_id
+                      className={`mt-2 p-2 w-full rounded shadow-inner ${errors.referredBy &&
+                          touched.referredBy
                           ? "border-red-500 border-2"
                           : "border"
                         }`}
-                    />
+                    >
+                      <option value="">Select Referred By</option>
+
+                      {/* // Filter the volunteers list with values.township */}
+                      {
+                        volunteers.filter((volunteer) => volunteer.township == values.township).map((volunteer) => (  
+                          <option key={volunteer.id} value={volunteer.id}>
+                            {volunteer.name}
+                          </option>
+                        ))
+                      }
+                    </Field>
                     <ErrorMessage
                       component="div"
-                      name="vot_id"
+                      name="referredBy"
                       className="text-red-500"
                     />
                   </div>
@@ -654,7 +677,7 @@ export const AddPatient = ({ move_to_vot }) => {
                 type="submit"
                 className="w-full h-10 p-2 bg-blue-600 text-white font-semibold rounded-lg disabled:opacity-80 flex items-center justify-center"
               >
-                {isEditing ? "Update" : "Save"}
+                {move_to_vot ? "Save" : isEditing ? "Update" : "Save"}
               </button>
             </Form>
           </div>

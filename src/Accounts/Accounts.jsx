@@ -6,7 +6,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { LoadingDialog } from "../Loading/LoadingDialog";
-import nodata from "../../public/nodata.webp";
+import nodata from "../assets/nodata.webp";
 
 
 const Accounts = () => {

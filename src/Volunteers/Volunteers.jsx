@@ -5,8 +5,7 @@ import { useState, useEffect } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Loading from "../Loading/Loading";
-import nodata from "../../public/nodata.webp";
+import nodata from "../assets/nodata.webp";
 import { LoadingDialog } from "../Loading/LoadingDialog";
 
 // write an enum for township {/* (CAT,CMT,PTG,PGT,AMT,MHA,AMP) */}

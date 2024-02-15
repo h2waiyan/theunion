@@ -6,9 +6,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { LoadingDialog } from "../Loading/LoadingDialog";
-import nodata from "../../public/nodata.webp";
-
-
+import nodata from "../assets/nodata.webp";
 
 // ○ Name (up to text 16 Characters)
 // ○ Registration Year (Drop Down list ➔ (2023,2024,2025,2026)
@@ -45,6 +43,7 @@ const Patients = ({ vot_table }) => {
   const [error, setError] = useState(null);
 
   const [filterVotType, setFilterVotType] = useState();
+  const [volunteers, setVolunteers] =  useState([]);
 
   const [deleteLoading, setDeleteLoading] = useState(false);
 
@@ -92,8 +91,18 @@ const Patients = ({ vot_table }) => {
   const indexOfFirstItem = indexOfLastItem - itemsCountPerPage;
   const currentPatients = patients.slice(indexOfFirstItem, indexOfLastItem);
 
+  const getVolunteers = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/volunteers");
+      setVolunteers(response.data["volunteers"]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getPatients();
+    getVolunteers();
   }, []);
 
   return (
@@ -107,9 +116,9 @@ const Patients = ({ vot_table }) => {
               className="border-2 border-gray-300 p-2 rounded-lg ms-2"
               onChange={(e) => setFilterVotType(e.target.value)}
             >
-              <option value="">Select VOT Type</option>
-              <option value="pure">Pure</option>
-              <option value="hybird">Hybird</option>
+              <option value="all">Select VOT Type</option>
+              <option value="Pure">Pure</option>
+              <option value="Hybrid">Hybrid</option>
             </select>
           </div>
         )}
@@ -196,8 +205,13 @@ const Patients = ({ vot_table }) => {
           </thead>
 
           <tbody className="bg-white divide-y divide-gray-200">
-            {currentPatients
-              .filter((patient) => patient.vot_type == filterVotType)
+            {
+              currentPatients
+              // .filter(patient => {
+              //   if (filterVotType != 'all') {
+              //     return patient.vot_type === filterVotType;
+              //   }
+              // })
               .map((patient, index) => (
                 <tr
                   className={index % 2 === 0 ? "bg-white" : "bg-slate-100"}
@@ -210,7 +224,9 @@ const Patients = ({ vot_table }) => {
                   <td className="p-3">{patient.age}</td>
                   <td className="p-3">{patient.drtb_code}</td>
                   <td className="p-3">{Township[patient.township]}</td>
-                  <td className="p-3">{patient.referred_by}</td>
+                  <td className="p-3">{
+                    volunteers.filter(volunteer => volunteer.id === patient.volunteer_id).map(volunteer => volunteer.name)
+                  }</td>
                   <td className="p-3">{patient.patient_code}</td>
                   <td className="p-3">{patient.address}</td>
                   <td className="p-3">{patient.treatment_start_date}</td>
@@ -237,7 +253,9 @@ const Patients = ({ vot_table }) => {
                     <td className="p-3">{patient.vot_start_date}</td>
                   )}
 
-                  {vot_table && <td className="p-3">{patient.vot_date}</td>}
+                  {vot_table && <td className="p-3">{
+                    volunteers.filter(volunteer => volunteer.id === patient.volunteer_id).map(volunteer => volunteer.name)
+                  }</td>}
 
                   <td className="flex flex-row p-3">
                     <MdEdit
