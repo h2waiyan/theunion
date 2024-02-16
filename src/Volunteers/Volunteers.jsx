@@ -36,7 +36,7 @@ const Volunteers = () => {
   const getVolunteers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://128.199.235.134/api/volunteers");
+      const response = await axios.get("http://theunion.htoowaiyan.me/api/volunteers");
       setVolunteers(response.data["volunteers"]);
     } catch (error) {
       setError(error);
@@ -53,7 +53,7 @@ const Volunteers = () => {
     try {
       setLoading(true);
       const response = await axios.delete(
-        "http://128.199.235.134/api/volunteers/" + data.id + "/delete"
+        "http://theunion.htoowaiyan.me/api/volunteers/" + data.id + "/delete"
       );
     } catch (error) {
       setError(error);

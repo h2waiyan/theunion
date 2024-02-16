@@ -26,7 +26,7 @@ const Accounts = () => {
   const getAccounts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://128.199.235.134/api/accounts");
+      const response = await axios.get("http://theunion.htoowaiyan.me/api/accounts");
       setAccounts(response.data["accounts"]);
     } catch (error) {
       setError(error);
@@ -43,7 +43,7 @@ const Accounts = () => {
     try {
         setDeleteLoading(true);
       const response = await axios.delete(
-        "http://128.199.235.134/api/accounts/" + data.id + "/delete"
+        "http://theunion.htoowaiyan.me/api/accounts/" + data.id + "/delete"
       );
       if (response.status === 200) {
         getAccounts();

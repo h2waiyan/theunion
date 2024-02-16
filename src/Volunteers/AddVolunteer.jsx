@@ -8,11 +8,17 @@ import axios from 'axios';
 
 
 let volunteerSchema = object({
-    name: string().required("Name cannot be blank."),
-    email: string().required("Invalid Email Address."),
+    name: string().required("Name cannot be blank.").max(16, "Only 16 characters allowed."),
+    email: string().required("Invalid Email Address.").email("Invalid Email Address."),
     password: string().required("Password cannot be blank."),
     township: number().min(1, "Please select a role.")
 });
+
+const generatePassword = () => {
+    // Generate a random integer between 100000 and 999999 (inclusive)
+    const password = Math.floor(Math.random() * 900000) + 100000;
+    return password.toString(); // Convert the integer to a string
+  };
 
 export const AddVolunteer = () => {
 
@@ -25,7 +31,7 @@ export const AddVolunteer = () => {
     const [volunteer, setVolunteer] = useState({
         name: "",
         email: "",
-        password: "",
+        password: generatePassword(),
         township: 0
     });
 
@@ -48,7 +54,7 @@ export const AddVolunteer = () => {
             setVolunteer({
                 name: "",
                 email: "",
-                password: "",
+                password: generatePassword(),
                 township: 0
             });
         }
@@ -77,10 +83,10 @@ export const AddVolunteer = () => {
         try {
             setAddVolunteerLoading(true);
             if (isEditing) {
-                const response = await axios.put(`http://128.199.235.134/api/volunteers/${volunteerId}/edit`, values);
+                const response = await axios.put(`http://theunion.htoowaiyan.me/api/volunteers/${volunteerId}/edit`, values);
                 setEditVolunteerSuccess(true);
             } else {
-                const response = await axios.post('http://128.199.235.134/api/volunteers', {...values});
+                const response = await axios.post('http://theunion.htoowaiyan.me/api/volunteers', {...values});
                 setAddVolunteerSuccess(true);
             }
         } catch (error) {
@@ -160,7 +166,7 @@ export const AddVolunteer = () => {
                                 <Field
                                     id="password"
                                     name="password"
-                                    placeholder="Password123!"
+                                    placeholder={volunteer.password}
                                     disabled={false}
                                     className={`mt-2 p-2 w-full rounded shadow-inner ${errors.password && touched.password
                                         ? "border-red-500 border-2"
