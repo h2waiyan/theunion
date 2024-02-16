@@ -53,12 +53,14 @@ const Patients = ({ vot_table }) => {
       setLoading(true);
       if (vot_table) {
         const response = await axios.get(
-          `${apiUrl}/vot_patients`
+          `${apiUrl}/patients`
         );
-        setPatients(response.data["patients"]);
+        let all_patients = response.data["patients"]
+        setPatients(all_patients.filter(patient => patient.is_vot_patient === true));
       } else {
         const response = await axios.get(`${apiUrl}/patients`);
-        setPatients(response.data["patients"]);
+        let all_patients = response.data["patients"]
+        setPatients(all_patients.filter(patient => patient.is_vot_patient === false));
       }
     } catch (error) {
       setError(error);
@@ -77,6 +79,9 @@ const Patients = ({ vot_table }) => {
       const response = await axios.delete(
         `${apiUrl}/patients/${data.id}/delete`
       );
+      if (response.status === 200) {
+        getPatients();
+      }
     } catch (error) {
       setError(error);
     } finally {

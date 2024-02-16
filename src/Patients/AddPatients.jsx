@@ -18,7 +18,7 @@ const Township = {
 };
 
 let patientSchema = object({
-  name: string().required("Name is required."),
+  name: string().required("Name is required.").max(16, "Only 16 characters allowed."),
   reg_year: string().required("Registration Year is required."),
   dob: string().required("DOB is required."),
   age: number().required("Age is required."),
@@ -27,13 +27,13 @@ let patientSchema = object({
   township: string().required("Township is required."),
   referredBy: string().required("Referred By is required."),
   patient_code: string().required("Patient Code is required."),
-  address: string().required("Address is required."),
+  address: string().required("Address is required.").max(30, "Only 30 characters allowed."),
   treatment_start_date: string().required("Treatment Start Date is required."),
   treatment_regimen: string().required("Treatment Regimen is required."),
 });
 
 let votPatientSchema = object({
-  name: string().required("Name is required."),
+  name: string().required("Name is required.").max(16, "Only 16 characters allowed."),
   reg_year: string().required("Registration Year is required."),
   dob: string().required("DOB is required."),
   age: number().required("Age is required."),
@@ -42,7 +42,7 @@ let votPatientSchema = object({
   township: string().required("Township is required."),
   referredBy: string().required("Referred By is required."),
   patient_code: string().required("Patient Code is required."),
-  address: string().required("Address is required."),
+  address: string().required("Address is required.").max(30, "Only 30 characters allowed."),
   treatment_start_date: string().required("Treatment Start Date is required."),
   treatment_regimen: string().required("Treatment Regimen is required."),
   vot_type: string().required("VOT Type is required."),
@@ -259,7 +259,7 @@ export const AddPatient = ({ move_to_vot }) => {
                       name="reg_year"
                       disabled={false}
                       onChange={() => {
-                        setFieldValue("patient_code", `${values.drtb_code}/${Township[values.township]}/${values.reg_year}`);
+                        setFieldValue("patient_code", `${event.target.value}/${Township[values.township]}/${event.target.value}`);
                         setFieldValue("reg_year", event.target.value);
                       }}
                       className={`mt-2 p-2 w-full rounded shadow-inner ${errors.reg_year && touched.reg_year
@@ -350,7 +350,6 @@ export const AddPatient = ({ move_to_vot }) => {
                       placeholder="123"
                       disabled={false}
                       onChange={() => {
-                        setFieldValue("patient_code", `${values.drtb_code}/${Township[values.township]}/${values.reg_year}`);
                         setFieldValue("drtb_code", event.target.value);
                       }}
                       className={`mt-2 p-2 w-full rounded shadow-inner ${errors.drtb_code && touched.drtb_code
@@ -403,7 +402,7 @@ export const AddPatient = ({ move_to_vot }) => {
                       name="township"
                       disabled={false}
                       onChange={() => {
-                        setFieldValue("patient_code", `${values.drtb_code}/${Township[values.township]}/${values.reg_year}`);
+                        setFieldValue("patient_code", `${values.drtb_code}/${event.target.value}/${values.reg_year}`);
                         setFieldValue("township", event.target.value);
                       }}
                       className={`mt-2 p-2 w-full rounded shadow-inner ${errors.township && touched.township
@@ -475,7 +474,7 @@ export const AddPatient = ({ move_to_vot }) => {
                     <Field
                       id="patient_code"
                       name="patient_code"
-                      value={`${values.drtb_code}/${Township[values.township]}/${values.reg_year}`}
+                      value={values.patient_code}
                       disabled={true}
                       className={`mt-2 p-2 w-full rounded shadow-inner ${errors.patient_code && touched.patient_code
                           ? "border-red-500 border-2"

@@ -57,6 +57,9 @@ const Volunteers = () => {
       const response = await axios.delete(
         `${apiUrl}/volunteers/${data.id}/delete`
       );
+      if (response.status === 200) {
+        getVolunteers();
+      }
     } catch (error) {
       setError(error);
     } finally {
