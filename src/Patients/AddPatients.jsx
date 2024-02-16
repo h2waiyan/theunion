@@ -402,7 +402,7 @@ export const AddPatient = ({ move_to_vot }) => {
                       name="township"
                       disabled={false}
                       onChange={() => {
-                        setFieldValue("patient_code", `${values.drtb_code}/${event.target.value}/${values.reg_year}`);
+                        setFieldValue("patient_code", `${values.drtb_code}/${Township[event.target.value]}/${values.reg_year}`);
                         setFieldValue("township", event.target.value);
                       }}
                       className={`mt-2 p-2 w-full rounded shadow-inner ${errors.township && touched.township

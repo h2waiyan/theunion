@@ -56,11 +56,11 @@ const Patients = ({ vot_table }) => {
           `${apiUrl}/patients`
         );
         let all_patients = response.data["patients"]
-        setPatients(all_patients.filter(patient => patient.is_vot_patient === true));
+        setPatients(all_patients.filter(patient => patient.is_vot_patient === 1));
       } else {
         const response = await axios.get(`${apiUrl}/patients`);
         let all_patients = response.data["patients"]
-        setPatients(all_patients.filter(patient => patient.is_vot_patient === false));
+        setPatients(all_patients.filter(patient => patient.is_vot_patient === 0));
       }
     } catch (error) {
       setError(error);
