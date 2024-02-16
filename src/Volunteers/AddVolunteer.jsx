@@ -5,6 +5,7 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import toast from "react-hot-toast";
 import axios from 'axios';
+import { apiUrl } from '../Utils/config';
 
 
 let volunteerSchema = object({
@@ -83,10 +84,10 @@ export const AddVolunteer = () => {
         try {
             setAddVolunteerLoading(true);
             if (isEditing) {
-                const response = await axios.put(`http://theunion.htoowaiyan.me/api/volunteers/${volunteerId}/edit`, values);
+                const response = await axios.put(`${apiUrl}/volunteers/${volunteerId}/edit`, values);
                 setEditVolunteerSuccess(true);
             } else {
-                const response = await axios.post('http://theunion.htoowaiyan.me/api/volunteers', {...values});
+                const response = await axios.post(`${apiUrl}/volunteers`, {...values});
                 setAddVolunteerSuccess(true);
             }
         } catch (error) {

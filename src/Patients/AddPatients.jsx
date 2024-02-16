@@ -5,6 +5,7 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { apiUrl } from '../Utils/config';
 
 const Township = {
   1: "CAT",
@@ -108,7 +109,7 @@ export const AddPatient = ({ move_to_vot }) => {
 
   const getVolunteers = async () => {
     try {
-      const response = await axios.get("http://theunion.htoowaiyan.me/api/volunteers");
+      const response = await axios.get(`${apiUrl}/volunteers`);
       setVolunteers(response.data["volunteers"]);
     } catch (error) {
       console.error(error);
@@ -171,7 +172,7 @@ export const AddPatient = ({ move_to_vot }) => {
       if (isEditing) {
         console.log(values);
         const response = await axios.put(
-          `http://theunion.htoowaiyan.me/api/patients/${patientId}/edit`,
+          `${apiUrl}/patients/${patientId}/edit`,
           {
             ...values,
             "is_vot_patient" : move_to_vot ? true : false,
@@ -182,7 +183,7 @@ export const AddPatient = ({ move_to_vot }) => {
         setEditPatientSuccess(true);
       } else {
         const response = await axios.post(
-          "http://theunion.htoowaiyan.me/api/patients",
+          `${apiUrl}/patients`,
           {
             ...values,
             "volunteer_id" : values.referredBy,

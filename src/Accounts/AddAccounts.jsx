@@ -5,7 +5,7 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from 'axios';
 import Loading from "../Loading/Loading";
-
+import { apiUrl } from '../Utils/config';
 
 let accountSchema = object({
     name: string().required("Name cannot be blank.").max(16, "Only 16 characters allowed."),
@@ -99,11 +99,11 @@ export const AddAccounts = () => {
 
             if (isEditing) {
                 setEditAccountLoading(true);
-                const response = await axios.put(`http://theunion.htoowaiyan.me/api/accounts/${accountId}/edit`, values);
+                const response = await axios.put(`${apiUrl}/accounts/${accountId}/edit`, values);
                 setEditAccountSuccess(true);
             } else {
                 setAddAccountLoading(true);
-                const response = await axios.post('http://theunion.htoowaiyan.me/api/accounts', { ...values });
+                const response = await axios.post(`${apiUrl}/accounts`, { ...values });
                 setAddAccountSuccess(true);
             }
         } catch (error) {

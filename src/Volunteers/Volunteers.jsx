@@ -7,6 +7,8 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import nodata from "../assets/nodata.webp";
 import { LoadingDialog } from "../Loading/LoadingDialog";
+import { apiUrl } from '../Utils/config';
+
 
 // write an enum for township {/* (CAT,CMT,PTG,PGT,AMT,MHA,AMP) */}
 const Township = {
@@ -36,7 +38,7 @@ const Volunteers = () => {
   const getVolunteers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://theunion.htoowaiyan.me/api/volunteers");
+      const response = await axios.get(`${apiUrl}/volunteers`);
       setVolunteers(response.data["volunteers"]);
     } catch (error) {
       setError(error);
@@ -53,7 +55,7 @@ const Volunteers = () => {
     try {
       setLoading(true);
       const response = await axios.delete(
-        "http://theunion.htoowaiyan.me/api/volunteers/" + data.id + "/delete"
+        `${apiUrl}/volunteers/${data.id}/delete`
       );
     } catch (error) {
       setError(error);

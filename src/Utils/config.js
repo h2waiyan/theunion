@@ -1,0 +1,1 @@
+export const apiUrl = 'https://theunion.htoowaiyan.me/api';

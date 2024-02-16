@@ -5,6 +5,7 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import toast from "react-hot-toast";
 import axios from 'axios';
+import { apiUrl } from '../Utils/config';
 
 let loginUserSchema = object({
     username: string().required("Please enter your username."),
@@ -27,7 +28,7 @@ export const Login = () => {
     async function login(values) {
         try {
             setLoading(true);
-            const response = await axios.post('http://theunion.htoowaiyan.me/api/auth/login', {
+            const response = await axios.post(`${apiUrl}/auth/login`, {
                 email : values['username'],
                 password : values['password']
             });

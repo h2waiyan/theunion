@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { LoadingDialog } from "../Loading/LoadingDialog";
 import nodata from "../assets/nodata.webp";
+import { apiUrl } from '../Utils/config';
 
 // ○ Name (up to text 16 Characters)
 // ○ Registration Year (Drop Down list ➔ (2023,2024,2025,2026)
@@ -52,11 +53,11 @@ const Patients = ({ vot_table }) => {
       setLoading(true);
       if (vot_table) {
         const response = await axios.get(
-          "http://theunion.htoowaiyan.me/api/vot_patients"
+          `${apiUrl}/vot_patients`
         );
         setPatients(response.data["patients"]);
       } else {
-        const response = await axios.get("http://theunion.htoowaiyan.me/api/patients");
+        const response = await axios.get(`${apiUrl}/patients`);
         setPatients(response.data["patients"]);
       }
     } catch (error) {
@@ -74,7 +75,7 @@ const Patients = ({ vot_table }) => {
     try {
       setDeleteLoading(true);
       const response = await axios.delete(
-        "http://theunion.htoowaiyan.me/api/patients/" + data.id + "/delete"
+        `${apiUrl}/patients/${data.id}/delete`
       );
     } catch (error) {
       setError(error);
@@ -93,7 +94,7 @@ const Patients = ({ vot_table }) => {
 
   const getVolunteers = async () => {
     try {
-      const response = await axios.get("http://theunion.htoowaiyan.me/api/volunteers");
+      const response = await axios.get(`${apiUrl}/volunteers`);
       setVolunteers(response.data["volunteers"]);
     } catch (error) {
       console.error(error);

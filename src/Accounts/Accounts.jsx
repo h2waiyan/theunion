@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { LoadingDialog } from "../Loading/LoadingDialog";
 import nodata from "../assets/nodata.webp";
+import { apiUrl } from '../Utils/config';
 
 
 const Accounts = () => {
@@ -26,7 +27,7 @@ const Accounts = () => {
   const getAccounts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://theunion.htoowaiyan.me/api/accounts");
+      const response = await axios.get(`${apiUrl}/accounts`);
       setAccounts(response.data["accounts"]);
     } catch (error) {
       setError(error);
@@ -43,7 +44,7 @@ const Accounts = () => {
     try {
         setDeleteLoading(true);
       const response = await axios.delete(
-        "http://theunion.htoowaiyan.me/api/accounts/" + data.id + "/delete"
+        `${apiUrl}/accounts/${data.id}/delete`
       );
       if (response.status === 200) {
         getAccounts();
